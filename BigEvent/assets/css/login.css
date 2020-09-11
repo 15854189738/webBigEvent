@@ -53,3 +53,16 @@ body {
   display: flex;
   justify-content: flex-end;
 }
+
+span {
+  color: rgb(218, 79, 79);
+  font-size: 14px;
+}
+
+.right {
+  color: green;
+}
+
+.wrong {
+  color: red;
+}
