@@ -110,11 +110,12 @@ $(function () {
       url: "http://ajax.frontend.itheima.net/api/login",
       data: $(this).serialize(),
       success: function (res) {
+        console.log(res);
+
         if (res.status !== 0) {
           alert(res.message);
           return;
         }
-
         // layer.msg('登录成功！')
         alert('登录成功！');
         // 将登录成功得到的 token 字符串，保存到 localStorage 中
