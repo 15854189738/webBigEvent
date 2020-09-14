@@ -1,25 +1,27 @@
 $(function () {
-  getUserInfo();
+  getUserText();
+  // 点击按钮，实现退出功能
+  var layer = layui.layer
+
   // 点击按钮，实现退出功能
   $('#btnLogout').on('click', function () {
     // 提示用户是否确认退出
     layer.confirm('确定退出登录?', {
       icon: 3,
-      title: '提示'
+      title: '退出登录'
     }, function (index) {
       //do something
       // 1. 清空本地存储中的 token
       localStorage.removeItem('token')
       // 2. 重新跳转到登录页面
-      location.href = '/login.html'
-
+      location.href = './login.html'
       // 关闭 confirm 询问框
       layer.close(index)
     })
   })
 });
 
-function getUserInfo() {
+function getUserText() {
   $.ajax({
     type: "GET",
     url: "/my/userinfo",
@@ -30,24 +32,12 @@ function getUserInfo() {
     },
     success: function (res) {
       console.log(res);
-
+      if (res.status !== 0) {
+        return layui.layer.msg('获取用户信息失败！')
+      }
       renderAvatar(res.data);
     },
-    complete: function (XMLHttpRequest, textStatus) {
-      if (textStatus == 'timeout') {
-        var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
-        xmlhttp.abort();
-        $(".box").html("网络超时！");
-      }
-      $("#inp").val("点击获取数据");
-    },
-    error: function (XMLHttpRequest, textStatus) {
-      console.log(XMLHttpRequest); //XMLHttpRequest.responseText    XMLHttpRequest.status   XMLHttpRequest.readyState
-      console.log(textStatus);
-      $(".box").html("服务器错误！");
-    }
   });
-
 }
 
 function renderAvatar(user) {
@@ -64,7 +54,5 @@ function renderAvatar(user) {
     $('.layui-nav-img').hide();
     var first = name[0].toUpperCase();
     $('.text-avatar').html(first).show();
-
   }
-
 }
