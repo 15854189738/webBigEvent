@@ -17,8 +17,11 @@
       <!-- 筛选区域 -->
       <form class="layui-form" id="form-search">
         <div class="layui-form-item layui-inline">
-          <select name="cate_id"></select>
+          <!-- 下拉框 -->
+          <select name="cate_id" value="123"></select>
+
         </div>
+
         <div class="layui-form-item layui-inline">
           <select name="state">
             <option value="">所有状态</option>
@@ -56,7 +59,7 @@
     </div>
   </div>
   <!-- 列表数据的模板结构 -->
-  <script type="text/html" id="tpl-table">
+  <script type="text/html" id="tpl_table">
     {{each data}}
     <tr>
       <td>{{$value.title}}</td>
